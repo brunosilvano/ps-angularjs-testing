@@ -5,9 +5,9 @@
     .module('app')
     .controller('expensesController', expensesController);
 
-  expensesController.$inject = ['$scope'];
+  expensesController.$inject = ['expensesDataService'];
 
-  function expensesController($scope) {
+  function expensesController(expensesDataService) {
     var vm = this;
     
     vm.activate = activate;
@@ -18,11 +18,7 @@
     ////////////////
 
     function activate() {
-      return vm.expenseItems = [
-        { title: 'Taxi', description: 'To airport', amount: '89.95'},
-        { title: 'Lunch', description: 'At airport', amount: '15.40'},
-        { title: 'Coffee', description: 'Starbucks', amount: '4.93'}
-      ];
+      vm.expenseItems = expensesDataService.getExpenses();
     }
   }
 })();
